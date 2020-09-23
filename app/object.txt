@@ -1,0 +1,69 @@
+import { countBy, result } from 'lodash';
+import React, { useEffect, useState } from 'react';
+import './App.css';
+
+function App() {
+  
+  const [personInfo, setPersonInfo] = useState({
+    firstname:'',
+    middlename:'',
+    lastname:'',
+    age:''
+  })
+
+
+  const [arrayOfData,setArrayOfData] = useState(['ds','dssdf'])
+  
+  const submitInfo = (field,value) =>{
+    setPersonInfo({
+        ...personInfo,
+        [field]:value
+    })
+  }
+
+  const sendDataToArray = () => {
+    let tempArray= [...arrayOfData]
+    let combination= (`${personInfo.firstname} ${personInfo.middlename} ${personInfo.lastname} ${personInfo.age}`)
+    tempArray.push(combination)
+    setArrayOfData(tempArray)
+    
+    //console.log(arrayOfData)
+
+  }
+
+  const displayPersonalInfo = (row,i) =>{
+    
+    return(
+    <li>{`${row}`}</li>
+    );
+  }
+
+
+  return(
+    
+    <div>
+      <h3 class="title">PERSONAL INFORMATION</h3>
+
+      <br/>
+    
+      Firstname: <input type="text" onChange={e => submitInfo('firstname', e.target.value)}/><br />
+      Middle name: <input type="text" onChange={e => submitInfo('middlename', e.target.value)}/><br />
+      Lastname: <input type="text" onChange={e => submitInfo('lastname', e.target.value)}/><br />
+      Age: <input type="text" onChange={e => submitInfo('age', e.target.value)}/><br />
+
+      <button onClick={sendDataToArray}>SUBMIT</button>
+
+      <br /><br />
+      
+      <p>RESULTS:</p>
+
+      <ul>
+        {arrayOfData.map((row) => displayPersonalInfo(row))}
+      </ul>
+
+    </div>
+  );
+  
+}
+
+export default App;

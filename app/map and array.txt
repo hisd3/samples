@@ -1,0 +1,107 @@
+import { countBy } from 'lodash';
+import React, { useEffect, useState } from 'react';
+import './App.css';
+
+function App() {
+
+  const [name, setName] = useState({
+    fName: '',
+    lName: '',
+  })
+  //const [fullname, setFullname] = useState('text')
+  const [arrayOfNumbers, setArrayOfNumbers] = useState([1,2,3,4,5,6])
+  const [arrayOfNames, setArrayOfNames]  = useState(['geru chan','kaneki ken'])
+
+
+  function addToArray(){
+    let myTemp = [...arrayOfNumbers]
+    myTemp.push(name.fName)
+    setArrayOfNumbers(myTemp)
+  }
+
+  // function makeFullname(){
+  //   setFullname(fistname + " " + lastname)
+  // }
+
+  // const angelu = (row) => {
+  //   return <li>{row}</li>
+  // }
+
+  const handleChange = (field, value) => {
+    setName({
+      ...name,
+      [field]: value
+    })
+
+    //addToArray()
+  }
+
+  const addToArrayOfNames = () => {
+
+    //setFullname(`${name.fName} ${name.lName}`)
+    let nameTemp=[...arrayOfNames]
+    let fullname= (`${name.fName} ${name.lName}`)
+    
+    nameTemp.push(fullname)
+    setArrayOfNames(nameTemp)
+
+
+
+  }
+
+  const displayNames = (row , i) => {
+      //setCount(count+1)
+      return (
+      <li>{`${i+=1}. ${row}`}</li>
+      )
+      
+  }
+
+  return (
+    <div>
+
+      <input type="text" onChange={e => handleChange('fName', e.target.value)} />
+      <input type="text" onChange={e => handleChange('lName', e.target.value)} />
+      <button onClick={addToArrayOfNames}>Submit</button>
+ 
+      <br /><br />   
+
+      <p>LIST OF NAMES: </p>
+      <ul>
+        {
+          arrayOfNames.map((row, i) => displayNames(row, i))
+        }
+      </ul>
+
+
+      <br /><br /><br /><br />      
+
+        {/*    SEARCH   */}
+
+        <input type="text" onkeydown="searchName()"/>
+
+        <p>LIST OF NAMES: </p>
+        <ul>
+          {
+            arrayOfNames.map((row, i) => displayNames(row, i))
+          }
+        </ul>
+
+
+
+
+    
+    </div>
+
+
+);
+
+  // let arrayOfNumbers = [1,2,3,4,5,6];
+        
+  // function addToArray(num) {
+  //   arrayOfNumbers.push(num)
+  //   document.getElementById('arrayContent').innerHTML= arrayOfNumbers;
+  // }
+}
+
+export default App;
