@@ -1,0 +1,79 @@
+@import '~antd/dist/antd.css';
+
+.top{
+  height: 80px;
+  width: 100%;
+  background-color: #FF5733 ;
+}
+.header{
+  padding: 20px 0px 10px 10px;
+  height: 80px;
+  margin: auto auto;
+  background-color: #FF5733 ;
+}
+.header-title{
+  color: #ffffff;
+  font-size: x-large;
+  text-align: left;
+}
+
+.text-box{
+  width: 300px;
+  margin-bottom: 10px;
+  border-color: #BD7F72;
+  align-items: center;
+}
+.forms-label{
+  font-size: 8px;
+  color: #C1C1C1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 30px;
+  margin: 0;
+}
+.forms{
+  padding-left: 40px;
+}
+
+
+.item1 { 
+  grid-area: header; 
+  background-color: #FF5733 ;
+}
+.item2 { 
+  grid-area: menu; 
+  background-color:#581845 ;
+}
+.item3 { 
+  grid-area: main; 
+  background-color:#900C3F ;
+}
+.item4 { 
+  grid-area: right; 
+  background-color:#FFC300 ;
+}
+.item5 { 
+  grid-area: footer;
+  background-color:#C70039 ; 
+}
+
+.container{
+  background-color: black;
+  width: 100%;
+  
+}
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  grid-gap: 10px;
+  width: 1500px;
+  margin:auto;
+}
+
+.grid-container > div {
+
+  text-align: center;
+  font-size: 30px;
+}

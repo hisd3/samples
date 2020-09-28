@@ -1,4 +1,5 @@
 import React from 'react'
+import { Table } from 'antd';
 
 function MyTable(props){
     const displayHeading = (row) =>{
@@ -10,7 +11,7 @@ function MyTable(props){
     const displayContent = (row,i) =>{
       return(
         <tr>
-          <td style={{ border:`2px solid black` }}>{row}</td>
+          <td style={{border:`2px solid black`}}>{row}</td>
           <td style={{border:`2px solid black`}}>{row}</td>
         </tr>
       );

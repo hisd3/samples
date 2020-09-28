@@ -3,21 +3,55 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import MyTable from './components/MyTable';
 import Heading from './components/Heading';
+import NarutoTable from './components/NarutoTable';
+import PersonalInfoForms from './components/PersonalInfoForms';
+import { Button } from 'antd';
 
 function App() {
   
+
+  // return(
+
+  //   <div className="container">
+  //     <div className="top"><Heading title={'PERSONAL INFORMATION'} /></div>
+  //     <div className="grid-container">
+  //       <div className="item2"></div>
+  //       <div className="item3"></div>  
+  //       <div className="item4"></div>
+  //       <div className="item5"></div>
+  //     </div>
+  //   </div>
+  // )
+
+
   const [personInfo, setPersonInfo] = useState({
     fname:'',
     mname:'',
     lname:'',
     p_age:''
   })
-  
-  const [tableHeading, setTableHeading]= useState(['FIRSTNAME', 'MIDDLENAME', 'LASTNAME', 'AGE'])
-  const [firstname, setFirstname]= useState([,'ds','ds'])
+
+  const [narutos, setNarutos] = useState([])
+  const [tableHeading]= useState(['FIRSTNAME', 'MIDDLENAME', 'LASTNAME', 'AGE'])
+  const [firstname, setFirstname]= useState(['ds','ds'])
   const [middlename, setMiddlename]= useState([])
   const [lastname, setLastname]= useState([])
   const [age, setAge]= useState([])
+
+  useEffect(() => {
+    console.log('ni execute ani')
+    getNarutos()
+  }, [])
+
+  const getNarutos = () => {
+    fetch("https://api.jikan.moe/v3/search/anime?q=naruto")
+    .then(response => response.json())
+    .then(result => {
+      if(result.results) {
+        setNarutos(result.results)
+      }
+    })
+  }
 
   const submitInfo = (field,value) =>{
     setPersonInfo({
@@ -25,7 +59,9 @@ function App() {
         [field]:value
     })
   }
+
   const sendDataToList = () =>{
+
     let tempFName= [...firstname]
     let tempLName= [...middlename]
     let tempMName= [...lastname]
@@ -40,9 +76,8 @@ function App() {
     setMiddlename(tempLName)
     setLastname(tempMName)
     setAge(tempAge)
+
   }
-
-
 
   return(
     
@@ -50,13 +85,9 @@ function App() {
       <Heading title={'PERSONAL INFORMATION'} />
 
       <br/>
-    
-      Firstname: <input type="text" onChange={e => submitInfo('fname', e.target.value)}/><br />
-      Middle Name: <input type="text" onChange={e => submitInfo('mname', e.target.value)}/><br />
-      Lastname: <input type="text" onChange={e => submitInfo('lname', e.target.value)}/><br />
-      Age: <input type="text" onChange={e => submitInfo('p_age', e.target.value)}/><br />
+      <PersonalInfoForms submitInfo={submitInfo} />
 
-      <button onClick={sendDataToList}>SUBMIT</button>
+      <Button type="primary" onClick={sendDataToList}>SUBMIT</Button>
 
       <br /><br />
       
@@ -68,6 +99,8 @@ function App() {
         tableHeadingData={tableHeading}
         aceBorder={'green'}
       />
+
+      <NarutoTable narutos={narutos} />
 
     </div>
   );
